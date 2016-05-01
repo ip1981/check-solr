@@ -1,0 +1,65 @@
+name: check-solr
+version: 0.1.0
+synopsis: Icinga / Nagios plugin for Solr
+license: MIT
+license-file: LICENSE
+author: Igor Pashev <pashev.igor@gmail.com>
+maintainer: Igor Pashev <pashev.igor@gmail.com>
+copyright: 2016, Zalora South East Asia Pte. Ltd
+category: Web, Monitoring, Metrics
+build-type: Simple
+extra-source-files: README.md ChangeLog.md
+cabal-version: >= 1.20
+
+source-repository head
+  type: git
+  location: https://github.com/zalora/check-solr.git
+
+library
+    default-language: Haskell2010
+    ghc-options: -Wall -static
+    hs-source-dirs: src
+    exposed-modules:
+        CheckSolr.Solr.MBeans
+      , CheckSolr.Query
+      , CheckSolr.Solr.ResponseHeader
+      , CheckSolr.Solr.Select
+      , CheckSolr.Stats
+      , CheckSolr.Thresholds
+    build-depends:
+        base                 >= 4.8 && < 5
+      , aeson                >= 0.9
+      , base64-bytestring    >= 1.0
+      , bytestring           >= 0.10
+      , docopt               >= 0.7
+      , HTTP                 >= 4000.3
+      , http-conduit         >= 2.1
+      , nagios-check         >= 0.3
+      , raw-strings-qq       >= 1.0
+      , regex-tdfa           >= 1.0
+      , scientific           >= 0.3
+      , text                 >= 1.2
+      , unordered-containers >= 0.2
+
+executable check_solr_query
+    default-language: Haskell2010
+    ghc-options: -Wall -static
+    hs-source-dirs: plugins
+    main-is: check_solr_query.hs
+    build-depends:
+        base                 >= 4.8 && < 5
+      , check-solr
+      , docopt               >= 0.7
+      , raw-strings-qq       >= 1.0
+
+executable check_solr_stats
+    default-language: Haskell2010
+    ghc-options: -Wall -static
+    hs-source-dirs: plugins
+    main-is: check_solr_stats.hs
+    build-depends:
+        base                 >= 4.8 && < 5
+      , check-solr
+      , docopt               >= 0.7
+      , raw-strings-qq       >= 1.0
+
